@@ -146,4 +146,51 @@ df <- data.frame(x = 1:3, y = c("a", "b", "c"))
 detect(df, is.factor)
 detect_index(df, is.factor)
 
+# 10 Function Factories ---------------------------------------------------
 
+power1 <- function(exp) {
+  function(x) {
+    x ^ exp
+    
+  }
+  
+}
+
+square <- power1(2)
+
+library(scales)
+library(rlang)
+library(ggplot2)
+
+
+# ** 10.4.1 Box-Cox Transformation ----------------------------------------
+
+boxcox1 <- function(x, lambda) {
+  stopifnot(length(lambda) == 1)
+  
+  if (lambda == 0) {
+    log(x)
+    
+  } else {
+    (x ^ lambda - 1) / lambda
+  }
+}
+
+# 13 S3 Classes -----------------------------------------------------------
+
+f <- factor(c("a", "b", "c"))
+
+typeof(f)
+
+attributes(f)
+
+unclass(f)
+
+# Cretae and assign a class.
+x <- structure(list(), class = "my_class")
+
+x <- list()
+class(x) <- "my_class"
+
+mod <- lm(log(mpg) ~ log(disp), data = mtcars)
+class(mod)
